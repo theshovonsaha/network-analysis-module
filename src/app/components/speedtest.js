@@ -21,7 +21,7 @@ import {
 import SettingsDialog from '@/app/components/ui/settings-dialog';
 import { NetworkAnalysis } from '@/app/components/NetworkAnalysis';
 import { AIAnalysis } from '@/app/components/AIAnalysis';
-import { API_URL } from '@/config/api';
+import API_CONFIG from '../../config/api';
 import { DevConsole } from '@/app/components/DevConsole';
 
 const SpeedTest = () => {
@@ -40,6 +40,7 @@ const SpeedTest = () => {
     const provider = localStorage.getItem('speedtest_provider');
 
     const headers = {
+      'Content-Type': 'application/json',
       ...(localStorage.getItem('speedtest_enable_ai') === 'true' &&
       apiKey &&
       provider
@@ -51,8 +52,19 @@ const SpeedTest = () => {
     };
 
     try {
-      const response = await fetch(`${API_URL}/speedtest/status`);
-      const reader = response.body.getReader();
+      // First request - Status updates
+      const statusResponse = await fetch(
+        `${API_CONFIG.baseUrl}/api/speedtest/status`,
+        {
+          headers,
+        }
+      );
+
+      if (!statusResponse.ok) {
+        throw new Error('Failed to fetch status');
+      }
+
+      const reader = statusResponse.body.getReader();
       const decoder = new TextDecoder();
 
       while (true) {
@@ -71,9 +83,16 @@ const SpeedTest = () => {
         }
       }
 
-      const testResponse = await fetch(`${API_URL}/speedtest`, {
-        headers: headers,
+      // Second request - Speed test results
+      const testResponse = await fetch(`${API_CONFIG.baseUrl}/api/speedtest`, {
+        method: 'POST',
+        headers,
       });
+
+      if (!testResponse.ok) {
+        throw new Error('Failed to run speed test');
+      }
+
       const data = await testResponse.json();
       setResult(data);
     } catch (err) {

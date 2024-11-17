@@ -3,7 +3,7 @@
   publish = ".next"
 
 [build.environment]
-  NEXT_PUBLIC_API_URL = "https://your-render-app-name.onrender.com"
+  NEXT_PUBLIC_API_URL = "https://network-analysis-module-backend.onrender.com"
 
 [[redirects]]
   from = "/_next/*"
