@@ -1,0 +1,29 @@
+/* Import tailwind directives */
+@import './styles/tailwind-imports.css';
+
+/* Custom properties */
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #171717;
+  }
+}
+
+/* Dark mode overrides */
+@layer utilities {
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: #0a0a0a;
+      --foreground: #ededed;
+    }
+  }
+}
+
+/* Global styles */
+@layer components {
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  }
+}
