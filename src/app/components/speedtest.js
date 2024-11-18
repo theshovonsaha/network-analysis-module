@@ -41,6 +41,8 @@ const SpeedTest = () => {
 
     const headers = {
       'Content-Type': 'application/json',
+      Accept: 'application/json',
+      'Access-Control-Allow-Origin': '*',
       ...(localStorage.getItem('speedtest_enable_ai') === 'true' &&
       apiKey &&
       provider

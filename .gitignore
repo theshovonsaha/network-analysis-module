@@ -32,3 +32,5 @@ __pycache__/
 *.py[cod]
 venv/
 setup-repos.sh
+# Local Netlify folder
+.netlify

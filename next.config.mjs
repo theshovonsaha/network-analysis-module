@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  optimizeFonts: true,
+  output: 'export',
+  images: {
+    unoptimized: true,
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.(woff|woffeot|ttf|otf)$/i,
