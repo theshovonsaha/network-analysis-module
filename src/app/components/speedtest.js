@@ -56,7 +56,7 @@ const SpeedTest = () => {
     try {
       // First request - Status updates
       const statusResponse = await fetch(
-        `${API_CONFIG.baseUrl}/api/speedtest/status`,
+        `${API_CONFIG.baseUrl}/speedtest/status`,
         {
           headers,
         }
@@ -86,7 +86,7 @@ const SpeedTest = () => {
       }
 
       // Second request - Speed test results
-      const testResponse = await fetch(`${API_CONFIG.baseUrl}/api/speedtest`, {
+      const testResponse = await fetch(`${API_CONFIG.baseUrl}/speedtest`, {
         method: 'POST',
         headers,
       });
