@@ -87,7 +87,7 @@ const SpeedTest = () => {
 
       // Second request - Speed test results
       const testResponse = await fetch(`${API_CONFIG.baseUrl}/speedtest`, {
-        method: 'POST',
+        method: 'GET',
         headers,
       });
 
